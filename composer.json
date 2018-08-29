@@ -1,0 +1,20 @@
+{
+    "name": "pixelarbeit/cf7-weclapp",
+    "description": "Connects CF7-Forms with WeClapp CRM system.",
+    "type": "wp-plugin",
+    "authors": [
+        {
+            "name": "Dennis",
+            "email": "info@pixelarbeit.de"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Pixelarbeit\\CF7WeClapp\\": "./classes",
+            "Pixelarbeit\\Http\\": "./lib/Http",
+            "Pixelarbeit\\WeClapp\\": "./lib/WeClapp",
+            "Pixelarbeit\\Wordpress\\": "./lib/Wordpress"
+        }
+    }
+}
