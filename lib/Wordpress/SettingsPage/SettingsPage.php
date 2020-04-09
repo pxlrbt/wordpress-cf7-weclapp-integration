@@ -3,7 +3,7 @@
 namespace Pixelarbeit\Wordpress\SettingsPage;
 
 if (class_exists('\Pixelarbeit\Wordpress\SettingsPage\SettingsPage') == false) {
-    
+
     /**
      * Wordpress settings helper
      */
@@ -104,7 +104,8 @@ if (class_exists('\Pixelarbeit\Wordpress\SettingsPage\SettingsPage') == false) {
          */
         public function registerMenu()
         {
-            add_options_page(
+            add_submenu_page(
+                'wpcf7',
                 $this->title,
                 $this->title,
                 'manage_options',
