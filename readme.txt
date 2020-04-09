@@ -20,7 +20,7 @@ This plugin adds the possibility for sending user form input to WeClapp to add n
 1. Activate the plugin through the 'Plugins' screen in WordPress
 
 ==Configuration==
-1. Create a api token inside WeClapp: Avatar > My Settigs > API Token
+1. Create an api token inside WeClapp: Avatar > My Settigs > API Token
 1. Set the WeClapp api token and tenant via Settings -> CF7 to WeClapp
 1. Configure forms via Contact -> "Your form" > WeClapp tab
 
