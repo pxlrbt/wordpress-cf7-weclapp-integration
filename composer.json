@@ -1,10 +1,10 @@
 {
-    "name": "pixelarbeit/cf7-weclapp",
-    "description": "Connects CF7-Forms with WeClapp CRM system.",
+    "name": "pixelarbeit/wordpress-cf7-weclapp",
+    "description": "Integrates WeClapp into Wordpress' Contact Form 7 forms.",
     "type": "wp-plugin",
     "authors": [
         {
-            "name": "Dennis",
+            "name": "Dennis Koch",
             "email": "info@pixelarbeit.de"
         }
     ],
