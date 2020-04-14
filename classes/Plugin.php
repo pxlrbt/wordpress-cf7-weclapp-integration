@@ -3,8 +3,9 @@
 namespace Pixelarbeit\CF7WeClapp;
 
 use Pixelarbeit\CF7WeClapp\Config\Config;
-
-
+use pxlrbt\Wordpress\Notifier\Notification;
+use pxlrbt\Wordpress\Notifier\Notifier;
+use WPCF7_ContactForm;
 
 class Plugin
 {
@@ -23,9 +24,9 @@ class Plugin
     {
         $admin = Admin::getInstance();
         $admin->init();
-        
+
         $frontend = new Frontend();
-        
+
         register_uninstall_hook(__FILE__, [__CLASS__, 'uninstall']);
         add_action('delete_post', [$this, 'deleteConfig'], 10, 1);
     }
@@ -34,17 +35,17 @@ class Plugin
 
     public static function uninstall()
     {
-        $forms = \WPCF7_ContactForm::find();
+        $forms = WPCF7_ContactForm::find();
         foreach ($forms as $form) {
             Config::deleteConfig($form->id());
         }
     }
 
-    
-    
+
+
     public function deleteConfig($postId)
-    {   
-        if (get_post_type($postId) == \WPCF7_ContactForm::post_type) {
+    {
+        if (get_post_type($postId) == WPCF7_ContactForm::post_type) {
             Config::deleteConfig($postId);
         }
     }

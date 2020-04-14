@@ -2,11 +2,7 @@
 
 namespace Pixelarbeit\WeClapp;
 
-
-
-use Pixelarbeit\Http\JsonClient;
-
-
+use pxlrbt\CF7WeClapp\Vendor\GuzzleHttp\Client;
 
 class Api
 {
@@ -20,15 +16,27 @@ class Api
     {
         $this->tenant = $tenant;
         $this->token = $token;
-        $this->client = new JsonClient();
+        $this->client = new Client();
     }
 
 
     public function request($url, $method = "GET", $data = null)
     {
-        $headers = ['AuthenticationToken: ' . $this->token];
-        $response = $this->client->request($method, $url, $data, $headers);
-        return $response[1];
+        $headers = ['AuthenticationToken' => $this->token];
+
+        $response = $this->client->request($method, $url, [
+            'json' => $data,
+            'headers' => $headers
+        ]);
+
+        $content = $response->getBody()->getContents();
+        $json = json_decode($content);
+
+        if ($json === null) {
+            throw new Exception('Invalid JSON response.');
+        }
+
+        return $json;
     }
 
 

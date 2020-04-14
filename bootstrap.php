@@ -7,7 +7,7 @@ Author:      pixelarbeit
 Author URI:  https://pixelarbeit.de
 */
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/vendor-prefixed/autoload.php';
 
 use Pixelarbeit\CF7WeClapp\Plugin;
 

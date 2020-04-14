@@ -2,24 +2,29 @@
 
 namespace Pixelarbeit\CF7WeClapp\CF7;
 
+use Exception;
 use Pixelarbeit\WeClapp\Api as WeClappApi;
-use Pixelarbeit\Wordpress\Notifier\Notifier;
-use Pixelarbeit\Wordpress\Logger\Logger;
 use Pixelarbeit\CF7WeClapp\Config\Config;
+
+use pxlrbt\CF7WeClapp\Vendor\pxlrbt\WordpressNotifier\Notifier;
+use pxlrbt\CF7WeClapp\Vendor\pxlrbt\WordpressNotifier\Notification;
+use pxlrbt\CF7WeClapp\Vendor\Monolog\Logger;
+use pxlrbt\CF7WeClapp\Vendor\Monolog\Handler\StreamHandler;
 use WPCF7_ContactForm;
 use WPCF7_Submission;
-
-
 
 
 class SubmissionHandler
 {
 	public function __construct(WeClappApi $api)
-	{        
-        $this->notifier = new Notifier('CF7 to WeClapp');
-        $this->logger = new Logger('CF7 to WeClapp');
+	{
+        $this->notifier = new Notifier();
+
+        $this->logger = new Logger('cf7-weclapp');
+        $this->logger->pushHandler(new StreamHandler(WP_CONTENT_DIR . '/cf7-weclapp.log'));
+
         $this->api = $api;
-	}	
+	}
 
 
 
@@ -33,35 +38,49 @@ class SubmissionHandler
         }
 
         $wcData = $this->getWeClappData($form);
-        
+
         if (empty($wcData)) {
             return;
         }
 
-        if (!empty($wcData['email'])) {
-            $contact = $this->getContactByEmail($wcData['email']);
-        }
+        try {
+            if (!empty($wcData['email'])) {
+                $contact = $this->getContactByEmail($wcData['email']);
+            }
 
-        if (isset($contact)) {
-            $wcData['salesChannel'] = $contact->salesChannel;
-            $wcData['useCustomsTariffNumber'] = $contact->useCustomsTariffNumber;
-            $result = $this->updateContact($contact->id, $wcData);
-        } else {
-            $result = $this->createContact($wcData);
+            $result = isset($contact)
+                ? $this->updateContact($contact->id, $wcData)
+                : $this->createContact($wcData);
+        } catch (Exception $e) {
+            $this->notifier->dispatch(
+                Notification::create('Beim Übertragen der Daten an WeClapp ist ein Fehler aufgetreten. Details siehe Log.')
+                    ->id('cf7weclapp.error.submission')
+                    ->type('error')
+                    ->persistent(true)
+                    ->dismissible(true)
+            );
+
+            $this->logger->error($e->getMessage(), compact('wcData'));
         }
 
         if (isset($result->error)) {
-            $this->notifier->error('Beim Übertragen der Daten an WeClapp ist ein Fehler aufgetreten. Details siehe Log.');
-            $this->logger->critical($result->error);
-        }        
+            $this->notifier->dispatch(
+                Notification::create('Beim Übertragen der Daten an WeClapp ist ein Fehler aufgetreten. Details siehe Log.')
+                    ->id('cf7weclapp.error.submission')
+                    ->type('error')
+                    ->persistent(true)
+                    ->dismissible(true)
+            );
+            $this->logger->error($result->error, compact('wcData'));
+        }
     }
 
 
 
     private function getCF7FormData()
     {
-        $submission = \WPCF7_Submission::get_instance();
-        
+        $submission = WPCF7_Submission::get_instance();
+
         if (isset($submission) == false) {
             return null;
         }
@@ -75,20 +94,20 @@ class SubmissionHandler
     {
         $weClappData = [];
         $formData = $this->getCF7FormData();
-        
+
         $fieldMapping = Config::getFieldMapping($form->id());
         $optionMapping = Config::getOptionMapping($form->id());
-        
+
 
         foreach ($formData as $cf7Name => $cf7Value) {
-            
-            
+
+
             if (array_key_exists($cf7Name, $fieldMapping) == false) {
                 continue;
             }
-            
+
             $weClappNames = $fieldMapping[$cf7Name];
-            
+
             // Handle radio buttons
             if (is_array($cf7Value)) {
                 $cf7Value = $cf7Value[0];
@@ -100,13 +119,13 @@ class SubmissionHandler
                         ? $optionMapping[$weClappName][$cf7Value]
                         : null;
                 }
-                
-    
+
+
                 $this->setArrayValueByMultidimensionalKey($weClappData, $weClappName, $cf7Value);
             }
-            
+
         }
-        
+
         if (!isset($weClappData['partyType'])) {
             $weClappData['partyType'] = isset($this->options['partyType'])
                 ? $this->options['partyType']
@@ -139,13 +158,13 @@ class SubmissionHandler
     {
         $type = isset($this->options['type']) ?  $this->options['type'] : 'contact';
 
-        $url = $this->api->buildUrl($type . '?properties=id,salesChannel,useCustomsTariffNumber&email-eq=' . $email);
+        $url = $this->api->buildUrl($type . '?properties=id&email-eq=' . $email);
         $resp = $this->api->request($url);
         return count($resp->result) > 0 ? $resp->result[0] : null;
     }
-    
-    
-    
+
+
+
     public function updateContact($id, $data)
     {
         $type = isset($this->options['type']) ?  $this->options['type'] : 'contact';
@@ -155,12 +174,12 @@ class SubmissionHandler
 
         return $result;
     }
-    
+
 
     public function createContact($data)
     {
-        $type = isset($this->options['type']) ?  $this->options['type'] : 'contact';        
-        
+        $type = isset($this->options['type']) ?  $this->options['type'] : 'contact';
+
         $url = $this->api->buildUrl($type);
         $result = $this->api->request($url, 'POST', $data);
 
