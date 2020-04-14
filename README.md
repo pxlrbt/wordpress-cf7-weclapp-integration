@@ -24,6 +24,10 @@ This plugin adds the possibility for sending user form input to WeClapp to add n
 1. Set the WeClapp api token and tenant via Settings -> CF7 to WeClapp
 1. Configure forms via Contact -> "Your form" > WeClapp tab
 
+## Links
+- [Github Repository](https://github.com/pxlrbt/wordpress-cf7-weclapp-integration/)
+- [WordPress Plugin Directory](https://wordpress.org/plugins/cf7-weclapp-integration/)
+
 ## Screenshots
 
 1. WeClapp form configuration
