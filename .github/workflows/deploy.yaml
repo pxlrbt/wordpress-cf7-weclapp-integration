@@ -5,10 +5,15 @@ on:
     - "*"
 jobs:
   tag:
-    name: New tag
+    name: Build and deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - name: Git checkout
+      uses: actions/checkout@master
+
+    - name: composer-php-scoper
+      uses: pxlrbt/action-composer-php-scoper@1.0
+
     - name: WordPress Plugin Deploy
       uses: 10up/action-wordpress-plugin-deploy@master
       env:
