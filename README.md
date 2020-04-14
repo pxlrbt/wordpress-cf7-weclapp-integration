@@ -4,7 +4,7 @@ Tags: contact form 7, cf7, weclapp, contact form 7 addon, contact form 7 integra
 Tested up to: 5.4 \
 Requires at least: 4.6 \
 Requires PHP: 5.5 \
-Stable tag: 1.1 \
+Stable tag: 1.2 \
 License: GPLv3 or later \
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,6 +29,10 @@ This plugin adds the possibility for sending user form input to WeClapp to add n
 1. WeClapp form configuration
 
 ## Changelog
+
+### 1.2
+* Refactor: Use Guzzle, Monolog, Notifier
+* Fix: Fix API payload
 
 ### 1.1
 * Move settings page
