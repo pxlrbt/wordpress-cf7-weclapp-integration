@@ -3,8 +3,6 @@
 namespace Pixelarbeit\CF7WeClapp;
 
 use Pixelarbeit\CF7WeClapp\Config\Config;
-use pxlrbt\Wordpress\Notifier\Notification;
-use pxlrbt\Wordpress\Notifier\Notifier;
 use WPCF7_ContactForm;
 
 class Plugin
