@@ -1,5 +1,5 @@
 {
-    "name": "pixelarbeit/wordpress-cf7-weclapp",
+    "name": "pxlrbt/wordpress-cf7-weclapp-integration",
     "description": "Integrates WeClapp into Wordpress' Contact Form 7 forms.",
     "type": "wp-plugin",
     "authors": [
@@ -28,6 +28,7 @@
             "php-scoper add-prefix --output-dir=./vendor-prefixed",
             "composer config vendor-dir ./vendor-prefixed/",
             "composer dump-autoload",
+            "php scoper.fix-autoloader.php",
             "composer config vendor-dir ./vendor/"
         ]
     },
