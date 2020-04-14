@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dda5f0bc995a02412835963dcffd12a5",
+    "content-hash": "419a453eea1707830a9b83e39cb268ca",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -375,16 +375,16 @@
         },
         {
             "name": "pxlrbt/wordpress-notifier",
-            "version": "1.0",
+            "version": "1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pxlrbt/wordpress-notifier.git",
-                "reference": "1bf4c108fcf9c6471c7ce2cbab402a51f8b22206"
+                "reference": "496c14b7140773969b12d4e0558f7e5ddaefa5ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pxlrbt/wordpress-notifier/zipball/1bf4c108fcf9c6471c7ce2cbab402a51f8b22206",
-                "reference": "1bf4c108fcf9c6471c7ce2cbab402a51f8b22206",
+                "url": "https://api.github.com/repos/pxlrbt/wordpress-notifier/zipball/496c14b7140773969b12d4e0558f7e5ddaefa5ab",
+                "reference": "496c14b7140773969b12d4e0558f7e5ddaefa5ab",
                 "shasum": ""
             },
             "type": "library",
@@ -411,7 +411,7 @@
                 "wordpress",
                 "wp"
             ],
-            "time": "2020-04-13T15:26:14+00:00"
+            "time": "2020-04-13T16:09:16+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
