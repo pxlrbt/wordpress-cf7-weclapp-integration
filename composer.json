@@ -11,7 +11,7 @@
     "require": {
         "guzzlehttp/guzzle": "^6.5",
         "monolog/monolog": "^2.0",
-        "pxlrbt/wordpress-notifier": "^1.0"
+        "pxlrbt/wordpress-notifier": "^1.1"
     },
     "autoload": {
         "psr-4": {
