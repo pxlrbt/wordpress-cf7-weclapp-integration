@@ -34,6 +34,9 @@ This plugin adds the possibility for sending user form input to WeClapp to add n
 
 ## Changelog
 
+### 1.2.1
+* Fix: Patch autoloader files to prevent collision
+
 ### 1.2
 * Refactor: Use Guzzle, Monolog, Notifier
 * Fix: Fix API payload
