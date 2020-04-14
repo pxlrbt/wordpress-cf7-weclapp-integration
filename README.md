@@ -1,11 +1,11 @@
 # WeClapp Integration for Contact Form 7
-Contributors: pixelarbeit \
-Tags: contact form 7, cf7, weclapp, contact form 7 addon, contact form 7 integration, crm \
-Tested up to: 5.4 \
-Requires at least: 4.6 \
-Requires PHP: 5.5 \
-Stable tag: 1.2 \
-License: GPLv3 or later \
+Contributors: pixelarbeit
+Tags: contact form 7, cf7, weclapp, contact form 7 addon, contact form 7 integration, crm
+Tested up to: 5.4
+Requires at least: 4.6
+Requires PHP: 5.5
+Stable tag: 1.2
+License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Send user form input to WeClapp to add new contacts/leads/customers recipients.
