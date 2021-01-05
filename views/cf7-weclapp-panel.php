@@ -23,8 +23,8 @@
                 <th>Active</th>
                 <td>
                     <input type="checkbox" name="wpcf7-weclapp_options[active]" <?php if (isset($options['active']) && $options['active'] == true): ?>checked<?php endif; ?>>
-                </td>            
-            </tr>        
+                </td>
+            </tr>
             <tr>
                 <th>Group</th>
                 <td>
@@ -33,8 +33,8 @@
                         <option value="customer" <?php if (isset($options['type']) && $options['type'] == 'customer'): ?>selected<?php endif; ?>>Customer</option>
                         <option value="lead" <?php if (isset($options['type']) && $options['type'] == 'lead'): ?>selected<?php endif; ?>>Lead</option>
                     </select>
-                </td>            
-            </tr>        
+                </td>
+            </tr>
             <tr>
                 <th>Party Type</th>
                 <td>
@@ -42,8 +42,8 @@
                         <option value="PERSON" <?php if (isset($options['type']) && $options['partyType'] == 'PERSON'): ?>selected<?php endif; ?>>Person</option>
                         <option value="ORGANIZATION"  <?php if (isset($options['type']) && $options['partyType'] == 'ORGANIZATION'): ?>selected<?php endif; ?>>Organisation</option>
                     </select>
-                </td>            
-            </tr>        
+                </td>
+            </tr>
         </tbody>
     </table>
     <br><br><br>
@@ -91,7 +91,7 @@
             <tr>
                 <th>First Name</th>
                 <td>
-                    <?php $fcc->printKeyMappingBox('firstName'); ?>    
+                    <?php $fcc->printKeyMappingBox('firstName'); ?>
                 </td>
                 <td></td>
             </tr>
@@ -108,7 +108,7 @@
                 </td>
             </tr>
             <tr>
-                <th>Company*</th>
+                <th>Company Name*</th>
                 <td>
                     <?php $fcc->printKeyMappingBox('company'); ?>
                 </td>
@@ -117,6 +117,18 @@
             <tr>
                 <td colspan="3">
                     <small>Company is minimum requirement for Party Type "Organisation".</small>
+                </td>
+            </tr>
+            <tr>
+                <th>Company*</th>
+                <td>
+                    <?php $fcc->printKeyMappingBox('personCompany'); ?>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <small>The persons company. For Party Type "Person".</small>
                 </td>
             </tr>
         </tbody>
@@ -222,7 +234,7 @@
             <tr>
                 <th>First Name</th>
                 <td>
-                    <?php $fcc->printKeyMappingBox('contacts.0.firstName'); ?>    
+                    <?php $fcc->printKeyMappingBox('contacts.0.firstName'); ?>
                 </td>
                 <td></td>
             </tr>
@@ -332,7 +344,7 @@
     }
 
     .mapping {
-        width: 100%;  
+        width: 100%;
         text-align: left;
         border-collapse: collapse;
         margin-bottom: 1.5em;
