@@ -34,6 +34,9 @@ This plugin adds the possibility for sending user form input to WeClapp to add n
 
 ## Changelog
 
+### 1.2.2
+* Security: Update dependencies
+
 ### 1.2.1
 * Fix: Patch autoloader files to prevent collision
 
